@@ -5,7 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
-    <script src="app.js"></script>
+    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="./style.css" />
   </head>
-  <body></body>
+  <body class="col">
+    <h1>Rock, Paper, Scissors</h1>
+    <div class="rps-options-menu col">
+      <h2>Select from the below options:</h2>
+      <div class="rps-options row">
+        <div class="rps rps-option" id="rock"></div>
+        <div class="rps rps-option" id="paper"></div>
+        <div class="rps rps-option" id="scissors"></div>
+      </div>
+    </div>
+    <div class="rps-rounds-menu">
+      <h2>Rounds:</h2>
+      <div class="rps-rounds row"></div>
+    </div>
+  </body>
 </html>
