@@ -2,15 +2,15 @@
 
 const rpsMap = {
   rock: {
-    imgSrc: "images/Rock-paper-scissors_(rock).png",
+    imgSrc: "./images/Rock-paper-scissors_(rock).png",
     rules: { rock: 0, paper: -1, scissors: 1 },
   },
   paper: {
-    imgSrc: "images/Rock-paper-scissors_(paper).png",
+    imgSrc: "./images/Rock-paper-scissors_(paper).png",
     rules: { rock: 1, paper: 0, scissors: -1 },
   },
   scissors: {
-    imgSrc: "images/Rock-paper-scissors_(scissors).png",
+    imgSrc: "./images/Rock-paper-scissors_(scissors).png",
     rules: { rock: -1, paper: 1, scissors: 0 },
   },
 };
