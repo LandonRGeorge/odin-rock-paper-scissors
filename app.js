@@ -37,10 +37,8 @@ function getTextualScore(score) {
   switch (score) {
     case -1:
       return "You lose!";
-      break;
     case 1:
       return "You win!";
-      break;
     default:
       return "Tie!";
   }
