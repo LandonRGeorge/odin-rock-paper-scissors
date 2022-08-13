@@ -1,26 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rock Paper Scissors</title>
-    <script src="app.js" defer></script>
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body class="col">
-    <h1>Rock, Paper, Scissors</h1>
-    <div class="rps-options-menu col">
-      <h2>Select from the below options:</h2>
-      <div class="rps-options row">
-        <div class="rps rps-option" id="rock"></div>
-        <div class="rps rps-option" id="paper"></div>
-        <div class="rps rps-option" id="scissors"></div>
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rock Paper Scissors</title>
+  <script src="app.js" defer></script>
+  <link rel="stylesheet" href="./style.css"/>
+</head>
+<body class="col">
+  <h1>Rock, Paper, Scissors</h1>
+  <div class="rps-options-menu col">
+    <h2>Select from the below options:</h2>
+    <div class="rps-options row">
+      <div class="rps rps-option" id="rockOption" data-value="rock"><img src="./images/Rock-paper-scissors_(rock).png"
+                                                                         alt=""></div>
+      <div class="rps rps-option" id="paperOption" data-value="paper"><img
+        src="./images/Rock-paper-scissors_(paper).png" alt=""></div>
+      <div class="rps rps-option" id="scissorsOption" data-value="scissors"><img
+        src="./images/Rock-paper-scissors_(scissors).png" alt=""></div>
+    </div>
+    <div>
+      <div class="rps-rounds row">
+        <div>
+          <h2>Player</h2>
+          <div class="rps" id="playerSelectionDisplay"><img src="" alt=""></div>
+          <div id="playerScoreDisplay">0</div>
+
+        </div>
+        <div>
+          <h2>Computer</h2>
+          <div class="rps" id="computerSelectionDisplay"><img src="" alt=""></div>
+          <div id="computerScoreDisplay">0</div>
+        </div>
+      </div>
+      <div>
+        <p id="roundWinnerDisplay"></p>
+        <p id="gameWinnerDisplay"></p>
+        <button id="resetButton">Reset</button>
       </div>
     </div>
-    <div class="rps-rounds-menu">
-      <h2>Rounds:</h2>
-      <div class="rps-rounds row"></div>
-    </div>
-  </body>
+  </div>
+</body>
 </html>

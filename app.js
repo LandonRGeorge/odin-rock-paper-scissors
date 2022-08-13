@@ -3,21 +3,40 @@
 const rpsMap = {
   rock: {
     imgSrc: "./images/Rock-paper-scissors_(rock).png",
-    rules: { rock: 0, paper: -1, scissors: 1 },
+    rules: {rock: 0, paper: -1, scissors: 1},
   },
   paper: {
     imgSrc: "./images/Rock-paper-scissors_(paper).png",
-    rules: { rock: 1, paper: 0, scissors: -1 },
+    rules: {rock: 1, paper: 0, scissors: -1},
   },
   scissors: {
     imgSrc: "./images/Rock-paper-scissors_(scissors).png",
-    rules: { rock: -1, paper: 1, scissors: 0 },
+    rules: {rock: -1, paper: 1, scissors: 0},
   },
 };
 
-function playerPlay() {
-  return prompt("Choose rock, paper, or scissors");
-}
+let playerSelectionDisplay = document.querySelector('#playerSelectionDisplay')
+let computerSelectionDisplay = document.querySelector('#computerSelectionDisplay')
+let playerScoreDisplay = document.querySelector('#playerScoreDisplay')
+let computerScoreDisplay = document.querySelector('#computerScoreDisplay')
+const rpsOptions = document.querySelectorAll(".rps-option");
+let playerScore = 0
+let computerScore = 0
+let rpsButton = document.querySelector('#resetButton')
+let gameWinnerDisplay = document.querySelector('#gameWinnerDisplay')
+let roundWinnerDisplay = document.querySelector('#roundWinnerDisplay')
+
+rpsButton.addEventListener('click', () => {
+  playerScore = 0
+  computerScore = 0
+  playerScoreDisplay.textContent = '0'
+  computerScoreDisplay.textContent = '0'
+  computerSelectionDisplay.querySelector('img').setAttribute('src', '')
+  playerSelectionDisplay.querySelector('img').setAttribute('src', '')
+  gameWinnerDisplay.textContent = ''
+  roundWinnerDisplay.textContent = ''
+})
+
 
 function computerPlay() {
   const choices = Object.keys(rpsMap);
@@ -30,68 +49,40 @@ function getImgSrc(rps) {
 }
 
 function getScore(playerSelection, computerSelection) {
-  return rpsMap[playerSelection].rules[computerSelection];
-}
-
-function getTextualScore(score) {
+  let score = rpsMap[playerSelection].rules[computerSelection];
   switch (score) {
     case -1:
-      return "You lose!";
+      computerScore += 1
+      computerScoreDisplay.textContent = computerScore
+      roundWinnerDisplay.textContent = `Bah, ${playerSelection} loses to ${computerSelection}!`
+      break
     case 1:
-      return "You win!";
+      playerScore += 1
+      playerScoreDisplay.textContent = playerScore
+      roundWinnerDisplay.textContent = `Yay, ${playerSelection} beats ${computerSelection}!`
+      break
     default:
-      return "Tie!";
+      roundWinnerDisplay.textContent = "Tie!"
   }
-}
 
-function createRpsSelectionElement(rps) {
-  const div = document.createElement("div");
-  div.classList.add("rps");
-  div.classList.add("rps-selection");
-  const img = document.createElement("img");
-  const imgSrc = getImgSrc(rps);
-  img.setAttribute("src", imgSrc);
-  div.appendChild(img);
-  return div;
-}
-
-function createRpsRoundElement(
-  playerSelection,
-  computerSelection,
-  textualScore
-) {
-  const rounds = document.querySelector(".rps-rounds");
-  const round = document.createElement("div");
-  const roundContainer = document.createElement("div");
-  roundContainer.classList.add("col");
-  roundContainer.classList.add("round-container");
-  round.classList.add("rps-round");
-  round.classList.add("row");
-  const player = createRpsSelectionElement(playerSelection);
-  const computer = createRpsSelectionElement(computerSelection);
-  const score = document.createElement("p");
-  score.innerText = textualScore;
-  round.appendChild(player);
-  round.appendChild(computer);
-  roundContainer.append(round);
-  roundContainer.appendChild(score);
-  rounds.appendChild(roundContainer);
 }
 
 function playRound(e) {
-  const playerSelection = e.target.parentElement.id;
-  const computerSelection = computerPlay();
-  const score = getScore(playerSelection, computerSelection);
-  const textualScore = getTextualScore(score);
-  createRpsRoundElement(playerSelection, computerSelection, textualScore);
+  if (playerScore >= 5 || computerScore >= 5) return
+  const playerSelection = e.currentTarget.dataset.value
+  const computerSelection = computerPlay()
+  getScore(playerSelection, computerSelection)
+  computerSelectionDisplay.querySelector('img').setAttribute('src', getImgSrc(computerSelection))
+  playerSelectionDisplay.querySelector('img').setAttribute('src', getImgSrc(playerSelection))
+  if (playerScore === 5) {
+    gameWinnerDisplay.textContent = 'Player wins!'
+  }
+  if (computerScore === 5) {
+    gameWinnerDisplay.textContent = 'Computer wins!'
+  }
+
 }
 
-const rpsOptions = document.querySelectorAll(".rps-option");
-for (let rpsOption of rpsOptions) {
-  const id = rpsOption.id;
-  const img = document.createElement("img");
-  const imgSrc = getImgSrc(id);
-  img.setAttribute("src", imgSrc);
-  rpsOption.appendChild(img);
+rpsOptions.forEach(rpsOption => {
   rpsOption.addEventListener("click", playRound);
-}
+})
